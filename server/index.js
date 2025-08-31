@@ -16,13 +16,22 @@ app.use(cookieParser());
 
 
 // Cross orgin resources sharing which allows to connect to fonrtend of the desired domain to make request in this backend.
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://todo-app-omega-eosin-46.vercel.app"
+]
+
 app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "https://todo-app-omega-eosin-46.vercel.app/"
-    ],
+    origin: function (origin, callback) {
+        if(!origin || allowedOrigins.includes(origin)){
+            callback(null, true);
+        } 
+        else{
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true
-}))
+}));
 
 
 // Mounting api-url on routes
