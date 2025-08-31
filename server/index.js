@@ -17,7 +17,10 @@ app.use(cookieParser());
 
 // Cross orgin resources sharing which allows to connect to fonrtend of the desired domain to make request in this backend.
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: [
+        "http://localhost:5173",
+        "https://todo-app-omega-eosin-46.vercel.app/"
+    ],
     credentials: true
 }))
 
